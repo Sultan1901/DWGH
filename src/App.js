@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from "react-bootstrap/Form";
+import Stack from "react-bootstrap/Stack";
 function App() {
   const [ww, setww] = useState(0);
   const [hh, sethh] = useState(0);
@@ -24,11 +26,10 @@ function App() {
 
   const CUL = () => {
     const BMI = (w, h) => {
-      w = ww;
+     w = ww;
       h = hh;
-      let Num = 0;
-      Num = w / h / h;
-      setres(Number(Num));
+      
+    setres(ww / hh / hh) 
 
       const IBW = (g) => {
         g = gender;
@@ -81,54 +82,70 @@ function App() {
   };
   return (
     <div>
-      <h3> ICU Calculate</h3>
-      <input
-        onChange={(e) => setname(e.target.value)}
-        placeholder="Name"
-      ></input>{" "}
-      <input onChange={(e) => setmrn(e.target.value)} placeholder="MRN"></input>
-  
-      <input
-        onChange={(e) => setww(e.target.value)}
-        placeholder="width"
-      ></input>{" "}
-      <input
-        onChange={(e) => sethh(e.target.value)}
-        placeholder="height"
-      ></input>
-      <input
-        onChange={(e) => setdiagnosis(e.target.value)}
-        placeholder="Diagnosis"
-      ></input>{" "}
-      <input onChange={(e) => setag(e.target.value)} placeholder="age"></input>{" "}
-      <label for="male"> Male </label>
-      <input
-        onChange={(e) => setgender(e.target.value)}
-        type="radio"
-        name="gender"
-        id="male"
-        value="male"
-      ></input>
-     <br/>
-      <label for="female"> Female </label>
-      <input
-        onChange={(e) => setgender(e.target.value)}
-        type="radio"
-        name="gender"
-        id="female"
-        value="female"
-      ></input>
+      <Stack gap={2} className="col-md-6 mx-auto">
+        <Stack className="col-md-6 mx-auto" gap={2}>
+          <h1 className="mb-3"> ICU Calculate</h1>
+        </Stack>
+
+        <InputGroup>
+          <Form.Control
+            onChange={(e) => setname(e.target.value)}
+            placeholder="Name"
+          />
+          <Form.Control
+            onChange={(e) => setmrn(e.target.value)}
+            placeholder="MRN"
+          />
+          <Form.Control
+            onChange={(e) => setww(e.target.value)}
+            placeholder="width"
+          />
+          <Form.Control
+            onChange={(e) => sethh(e.target.value)}
+            placeholder="height"
+          />
+          <Form.Control
+            onChange={(e) => setdiagnosis(e.target.value)}
+            placeholder="Diagnosis"
+          />
+          <Form.Control
+            onChange={(e) => setag(e.target.value)}
+            placeholder="age"
+          />{" "}
+          
+          <label for="male"> Male </label>
+          <input
+            onChange={(e) => setgender(e.target.value)}
+            type="radio"
+            name="gender"
+            id="male"
+            value="male"
+          ></input>
+         
+          <label for="female">Female</label>
+          <input
+            onChange={(e) => setgender(e.target.value)}
+            type="radio"
+            name="gender"
+            id="female"
+            value="female"
+          ></input>{" "}
+        </InputGroup>
+      </Stack>{" "}
       {/* <button onClick={CUL}>Calculate</button> */}
-      <hr/>
-      <h5>Name = {name}</h5>
-      <h6>MRN = {mrn}</h6>
-      <h6>BMI = {res.toFixed(1)}</h6>
-      <h6>KCAL = {res1.toFixed(1) + " - " + res2.toFixed(1)}</h6>
-      <h6>IBW = {Math.round(res3)}</h6>
-      <h6>PROTEIN = {Math.round(res4) + " - " + Math.round(res5)}</h6>
-      <h6>FLUID = {Math.round(res6)}</h6>
-      <h6>ADW = {Math.round(res7)}</h6>
-      <h6>Diagnosis = {diagnosis}</h6>
+      <Stack className="col-md-6 mx-auto" gap={0}>
+       <hr></hr> <div>
+          <h5>Name : {name}</h5>
+          <h6>MRN : {mrn}</h6>
+          <h6>Diagnosis : {diagnosis}</h6>
+          <h6>BMI : {res.toFixed(1)}</h6>
+          <h6>KCAL : {res1.toFixed(1) + " - " + res2.toFixed(1)}</h6>
+          <h6>IBW : {Math.round(res3)}</h6>
+          <h6>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</h6>
+          <h6>FLUID : {Math.round(res6)}</h6>
+          <h6>ADW : {Math.round(res7)}</h6>
+        </div>
+      </Stack>
     </div>
   );
 }
