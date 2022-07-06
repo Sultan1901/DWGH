@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import style from "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
+import Card from "react-bootstrap/Card";
 function App() {
   const [ww, setww] = useState(0);
   const [hh, sethh] = useState(0);
@@ -81,10 +83,10 @@ function App() {
     BMI();
   };
   return (
-    <div>
+    <div id="bd">
       <Stack gap={2} className="col-md-6 mx-auto">
-        <Stack className="col-md-6 mx-auto" gap={2}>
-          <h1 className="mb-3"> ICU Calculate</h1>
+        <Stack className="col-md-6 row-ml-6 mx-auto" gap={2}>
+          <h3 className="mb-2"> ICU Calculate</h3>
         </Stack>
 
         <InputGroup>
@@ -112,8 +114,7 @@ function App() {
             onChange={(e) => setag(e.target.value)}
             placeholder="age"
           />{" "}
-          
-          <label for="male"> Male </label>
+          <p> Male </p>
           <input
             onChange={(e) => setgender(e.target.value)}
             type="radio"
@@ -121,8 +122,8 @@ function App() {
             id="male"
             value="male"
           ></input>
-         
-          <label for="female">Female</label>
+          <br />
+          <p>Female</p>
           <input
             onChange={(e) => setgender(e.target.value)}
             type="radio"
@@ -132,20 +133,40 @@ function App() {
           ></input>{" "}
         </InputGroup>
       </Stack>{" "}
-      {/* <button onClick={CUL}>Calculate</button> */}
+      {/* <Dropdown onSelect={(e) => setgender(e.target.value)}>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          gender{" "}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item value={"male"}>Male</Dropdown.Item>
+          <Dropdown.Item value={"female"}>Female</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown> */}
       <Stack className="col-md-6 mx-auto" gap={0}>
-       <hr></hr> <div>
-          <h5>Name : {name}</h5>
-          <h6>MRN : {mrn}</h6>
-          <h6>Diagnosis : {diagnosis}</h6>
-          <h6>BMI : {res.toFixed(1)}</h6>
-          <h6>KCAL : {res1.toFixed(1) + " - " + res2.toFixed(1)}</h6>
-          <h6>IBW : {Math.round(res3)}</h6>
-          <h6>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</h6>
-          <h6>FLUID : {Math.round(res6)}</h6>
-          <h6>ADW : {Math.round(res7)}</h6>
-        </div>
-      </Stack>
+        <hr></hr> <h5>Name : {name}</h5>
+        <h6>MRN : {mrn}</h6>
+        <h6>Diagnosis : {diagnosis}</h6>
+        <h6>BMI : {res.toFixed(1)}</h6>
+        <h6>KCAL : {res1.toFixed(1) + " - " + res2.toFixed(1)}</h6>
+        <h6>IBW : {Math.round(res3)}</h6>
+        <h6>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</h6>
+        <h6>FLUID : {Math.round(res6)}</h6>
+        <h6>ADW : {Math.round(res7)}</h6>
+        
+      </Stack>{" "}
+      <Card className="text-center">
+        <Card.Header>Only for noncommercial use</Card.Header>
+        <Card.Body>
+          <Card.Title>using site to personal purpose </Card.Title>
+          <Card.Text>all results checked and tested by Nutrition Team</Card.Text>
+        </Card.Body>
+        <Card.Footer className="text-muted">
+          {" "}
+          Coded by Sultan Alharbi <br />
+          All Rights Reserved © 2022
+        </Card.Footer>
+      </Card>
     </div>
   );
 }
