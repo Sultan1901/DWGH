@@ -22,11 +22,14 @@ const Nutrition = () => {
   const [res5, setres5] = useState(0);
   const [res6, setres6] = useState(0);
   const [res7, setres7] = useState(0);
-
+//  useEffect(() => {
+//     localStorage.getItem('name')
+//    },[name]);
   useEffect(() => {
     CUL();
   });
-
+  
+ 
   const CUL = () => {
     const BMI = (w, h) => {
       w = ww;
@@ -83,6 +86,7 @@ const Nutrition = () => {
     };
     BMI();
   };
+ 
   return (
     <div id="bd">
       <Stack gap={2} className="col-md-6 mx-auto">
@@ -92,8 +96,9 @@ const Nutrition = () => {
 
         <InputGroup>
           <Form.Control
-            onChange={(e) => setname(e.target.value)}
+            onChange={(e) => setname(e.target.value)  }
             placeholder="Name"
+      
           />
           <Form.Control
             onChange={(e) => setmrn(e.target.value)}
@@ -126,6 +131,7 @@ const Nutrition = () => {
           <br />
           <p>Female</p>
           <input
+            className="row-ml-6"
             onChange={(e) => setgender(e.target.value)}
             type="radio"
             name="gender"
@@ -134,34 +140,25 @@ const Nutrition = () => {
           ></input>{" "}
         </InputGroup>
       </Stack>{" "}
-
-      {/* <Dropdown onSelect={(e) => setgender(e.target.value)}>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          gender{" "}
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          <Dropdown.Item value={"male"}>Male</Dropdown.Item>
-          <Dropdown.Item value={"female"}>Female</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown> */}
-
+     
       <Stack className="col-md-6 mx-auto" gap={0}>
-        <hr></hr> <h5>Name : {name}</h5>
-        <h6>MRN : {mrn}</h6>
-        <h6>Diagnosis : {diagnosis}</h6>
-        <h6>BMI : {res.toFixed(1)}</h6>
-        <h6>KCAL : {res1.toFixed(1) + " - " + res2.toFixed(1)}</h6>
-        <h6>IBW : {Math.round(res3)}</h6>
-        <h6>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</h6>
-        <h6>FLUID : {Math.round(res6)}</h6>
-        <h6>ADW : {Math.round(res7)}</h6>
-        {/* <button onClick={<script>{alert("sss")}</script>}></button> */}
+        <hr/> 
+
+        {!name ?<></>:<h6>Name : {name}</h6>}
+        {!mrn ?<></>:<h6>MRN : {mrn}</h6>}
+        {!diagnosis?<></>:<h6>Diagnosis : {diagnosis}</h6>}
+        {!res?<></>:<h6>BMI : {res.toFixed(1)}</h6>}
+        {!res1&&!res2?<></>:<h6>KCAL : {res1.toFixed(1) + " - " + res2.toFixed(1)}</h6>}
+        {!res3?<></>:<h6>IBW : {Math.round(res3)}</h6>}
+        {!res4&&!res5?<></>:<h6>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</h6>}
+        {!res6?<></>:<h6>FLUID : {Math.round(res6)}</h6>}
+        {!res7?<></>:<h6>ADW : {Math.round(res7)}</h6>}
+        {/* <button onClick={CUL}></button> */}
       </Stack>
       <Card className="text-center">
         <Card.Header>Only for noncommercial use</Card.Header>
         <Card.Body>
-          <Card.Title>using site to personal purpose </Card.Title>
+          <Card.Title>using this App only for personal purpose </Card.Title>
           <Card.Text>
             all results checked and tested by Nutrition Team
           </Card.Text>
