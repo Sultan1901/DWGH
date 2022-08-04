@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import style from "./App.css";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
@@ -22,14 +22,11 @@ const Nutrition = () => {
   const [res5, setres5] = useState(0);
   const [res6, setres6] = useState(0);
   const [res7, setres7] = useState(0);
-//  useEffect(() => {
-//     localStorage.getItem('name')
-//    },[name]);
+
   useEffect(() => {
     CUL();
   });
-  
- 
+
   const CUL = () => {
     const BMI = (w, h) => {
       w = ww;
@@ -86,7 +83,25 @@ const Nutrition = () => {
     };
     BMI();
   };
- 
+
+  const addpatient = async () => {
+    try {
+      const insert = await axios.post(`http://localhost:5000/addPatient`, {
+        name: name,
+        mrn: mrn,
+        diagnosis: diagnosis,
+        gender: gender,
+        bmi: res.toFixed(1),
+        kcal: [res1.toFixed(1), res2.toFixed(1)],
+        ibw: Math.round(res3),
+        protein: [Math.round(res4), Math.round(res5)],
+        fluid: Math.round(res6),
+        adw: Math.round(res7),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div id="bd">
       <Stack gap={2} className="col-md-6 mx-auto">
@@ -96,9 +111,8 @@ const Nutrition = () => {
 
         <InputGroup>
           <Form.Control
-            onChange={(e) => setname(e.target.value)  }
+            onChange={(e) => setname(e.target.value)}
             placeholder="Name"
-      
           />
           <Form.Control
             onChange={(e) => setmrn(e.target.value)}
@@ -140,20 +154,30 @@ const Nutrition = () => {
           ></input>{" "}
         </InputGroup>
       </Stack>{" "}
-     
       <Stack className="col-md-6 mx-auto" gap={0}>
-        <hr/> 
+        <hr />
 
-        {!name ?<></>:<h6>Name : {name}</h6>}
-        {!mrn ?<></>:<h6>MRN : {mrn}</h6>}
-        {!diagnosis?<></>:<h6>Diagnosis : {diagnosis}</h6>}
-        {!res?<></>:<h6>BMI : {res.toFixed(1)}</h6>}
-        {!res1&&!res2?<></>:<h6>KCAL : {res1.toFixed(1) + " - " + res2.toFixed(1)}</h6>}
-        {!res3?<></>:<h6>IBW : {Math.round(res3)}</h6>}
-        {!res4&&!res5?<></>:<h6>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</h6>}
-        {!res6?<></>:<h6>FLUID : {Math.round(res6)}</h6>}
-        {!res7?<></>:<h6>ADW : {Math.round(res7)}</h6>}
-        {/* <button onClick={CUL}></button> */}
+        {!name ? <></> : <h6>Name : {name}</h6>}
+        {!mrn ? <></> : <h6>MRN : {mrn}</h6>}
+        {!diagnosis ? <></> : <h6>Diagnosis : {diagnosis}</h6>}
+        {!res ? <></> : <h6>BMI : {res.toFixed(1)}</h6>}
+        {!res1 && !res2 ? (
+          <></>
+        ) : (
+          <h6>KCAL : {res1.toFixed(1) + " - " + res2.toFixed(1)}</h6>
+        )}
+        {!res3 ? <></> : <h6>IBW : {Math.round(res3)}</h6>}
+        {!res4 && !res5 ? (
+          <></>
+        ) : (
+          <h6>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</h6>
+        )}
+        {!res6 ? <></> : <h6>FLUID : {Math.round(res6)}</h6>}
+        {!res7 ? <></> : <h6>ADW : {Math.round(res7)}</h6>}
+        {/* <Text color="black" fontSize="12px">
+          on {e.time.slice(0, 10)} {e.time.slice(11, 16)}
+        </Text> */}
+        <button onClick={addpatient}>save</button>
       </Stack>
       <Card className="text-center">
         <Card.Header>Only for noncommercial use</Card.Header>
