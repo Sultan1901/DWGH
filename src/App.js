@@ -87,8 +87,9 @@ function App() {
   // };
   return (
     <div>
-< Nutrition />
-
+     
+      <Nutrition /> 
+      
     </div>
     // <div id="bd">
     //   {/* <Stack gap={2} className="col-md-6 mx-auto">
@@ -163,7 +164,7 @@ function App() {
     //     <h6>FLUID : {Math.round(res6)}</h6>
     //     <h6>ADW : {Math.round(res7)}</h6>
     //     {/* <button onClick={<script>{alert("sss")}</script>}></button> */}
-        
+
     //   </Stack>
     //   <Card className="text-center">
     //     <Card.Header>Only for noncommercial use</Card.Header>

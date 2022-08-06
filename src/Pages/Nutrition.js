@@ -5,6 +5,8 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
+import Spinner from "react-bootstrap/Spinner";
+import Nav from "react-bootstrap/Nav";
 
 const Nutrition = () => {
   const [ww, setww] = useState(0);
@@ -22,10 +24,16 @@ const Nutrition = () => {
   const [res5, setres5] = useState(0);
   const [res6, setres6] = useState(0);
   const [res7, setres7] = useState(0);
+  const [patt, setpatt] = useState([]);
+  const [mrr, setmrr] = useState(0);
 
   useEffect(() => {
     CUL();
   });
+
+  useEffect(() => {
+    result();
+  }, []);
 
   const CUL = () => {
     const BMI = (w, h) => {
@@ -89,6 +97,7 @@ const Nutrition = () => {
       const insert = await axios.post(`http://localhost:5000/addPatient`, {
         name: name,
         mrn: mrn,
+        age: ag,
         diagnosis: diagnosis,
         gender: gender,
         bmi: res.toFixed(1),
@@ -102,8 +111,24 @@ const Nutrition = () => {
       console.log(error);
     }
   };
+
+  const result = async () => {
+    const data = await axios
+      .get(`http://localhost:5000/getPatient/${mrr}`, {
+        mrn: mrr,
+      })
+      .then((result) => {
+        setpatt(result.data);
+        console.log(patt);
+      });
+  };
   return (
     <div id="bd">
+      <Nav>
+        <Nav.Item>
+          <Nav.Link href="/Print">Refresh</Nav.Link>
+        </Nav.Item>
+      </Nav>
       <Stack gap={2} className="col-md-6 mx-auto">
         <Stack className="row-ml-6 mx-auto" gap={2}>
           <h3 className="mb-2"> ICU Calculate</h3>
@@ -156,8 +181,8 @@ const Nutrition = () => {
       </Stack>{" "}
       <Stack className="col-md-6 mx-auto" gap={0}>
         <hr />
-
         {!name ? <></> : <h6>Name : {name}</h6>}
+        {!name ? <></> : <h6>Name : {ag}</h6>}
         {!mrn ? <></> : <h6>MRN : {mrn}</h6>}
         {!diagnosis ? <></> : <h6>Diagnosis : {diagnosis}</h6>}
         {!res ? <></> : <h6>BMI : {res.toFixed(1)}</h6>}
@@ -177,7 +202,40 @@ const Nutrition = () => {
         {/* <Text color="black" fontSize="12px">
           on {e.time.slice(0, 10)} {e.time.slice(11, 16)}
         </Text> */}
+        {/* <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner> */}
         <button onClick={addpatient}>save</button>
+        <hr />
+        <input
+          onChange={(e) => setmrr(e.target.value)}
+          placeholder="Enter MRN"
+        ></input>
+        <hr />
+        <button onClick={result}>Get Patient data</button>
+        {patt.map((e) => {
+          return (
+            <>
+              <p>Register time: {e.time.slice(0, 10)}</p>
+              <p>Name: {e.name}</p>
+              <p>MRN: {e.mrn}</p>
+              <p>Age: {e.age}</p>
+              <p>Gender: {e.gender}</p>
+              <p>Diagnosis: {e.diagnosis}</p>
+              <p>Fluid: {e.fluid}</p>
+              <p>IBW: {e.ibw}</p>
+              <p>
+                KCAL Min: {e.kcal[0]}
+                <p>KCAL Max: {e.kcal[1]}</p>
+              </p>
+
+              <p>
+                Protien Min: {e.protein[0]}
+                <p>Protien Max: {e.protein[1]}</p>
+              </p>
+            </>
+          );
+        })}
       </Stack>
       <Card className="text-center">
         <Card.Header>Only for noncommercial use</Card.Header>
