@@ -94,7 +94,7 @@ const Nutrition = () => {
 
   const addpatient = async () => {
     try {
-      const insert = await axios.post(`http://localhost:5000/addPatient`, {
+      const insert = await axios.post(`https://dwgh.herokuapp.com/addPatient`, {
         name: name,
         mrn: mrn,
         age: ag,
@@ -114,7 +114,7 @@ const Nutrition = () => {
 
   const result = async () => {
     const data = await axios
-      .get(`http://localhost:5000/getPatient/${mrr}`, {
+      .get(`https://dwgh.herokuapp.com/${mrr}`, {
         mrn: mrr,
       })
       .then((result) => {
