@@ -113,7 +113,7 @@ const Nutrition = () => {
 
   const result = async () => {
     const data = await axios
-      .get(`https://dwgh.herokuapp.com/${mrr}`, {
+      .get(`https://dwgh.herokuapp.com/getPatient/:mrn/${mrr}`, {
         mrn: mrr,
       })
       .then((result) => {
