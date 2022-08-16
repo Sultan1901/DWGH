@@ -125,7 +125,7 @@ const Nutrition = () => {
     <div id="bd">
       <Nav>
         <Nav.Item>
-          <Nav.Link href="/Print">Refresh</Nav.Link>
+          <Nav.Link href="/">Refresh</Nav.Link>
         </Nav.Item>
       </Nav>
       <Stack gap={2} className="col-md-6 mx-auto">
