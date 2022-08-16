@@ -5,7 +5,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
-import Spinner from "react-bootstrap/Spinner";
 import Nav from "react-bootstrap/Nav";
 
 const Nutrition = () => {
