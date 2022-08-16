@@ -118,7 +118,7 @@ const Nutrition = () => {
       })
       .then((result) => {
         setpatt(result.data);
-        console.log(patt);
+      
       });
   };
   return (
