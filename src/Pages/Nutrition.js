@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
-import Stack from "react-bootstrap/Stack";
-import Card from "react-bootstrap/Card";
-import Nav from "react-bootstrap/Nav";
+import {
+  ChakraProvider,
+  Box,
+  Text,
+  VStack,
+  // theme,
+  // Select,
+  Input,
+  Button,
+  // Link,
+  HStack,
+  useToast,
+  // CircularProgress,
+  // Textarea,
+  Radio,
+  RadioGroup,
+  Stack,
+} from "@chakra-ui/react";
 
 const Nutrition = () => {
   const [ww, setww] = useState(0);
@@ -32,7 +44,7 @@ const Nutrition = () => {
 
   useEffect(() => {
     result();
-  }, []);
+  },[]);
 
   const CUL = () => {
     const BMI = (w, h) => {
@@ -106,150 +118,162 @@ const Nutrition = () => {
         fluid: Math.round(res6),
         adw: Math.round(res7),
       });
+       toast({
+         title: "Done !",
+         description: "Patient added successfuly",
+         status: "success",
+         duration: 5000,
+         isClosable: true,
+       });
     } catch (error) {
-      console.log(error);
+      toast({
+        title: "An error occurred.",
+        description: "Patient already exists",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
   const result = async () => {
-    const data = await axios
+    try {
+   
+      const data = await axios
       .get(`https://dwgh.herokuapp.com/getPatient/${mrr}`, {
         mrn: mrr,
       })
       .then((result) => {
         setpatt(result.data);
-      
+       
       });
-  };
-  return (
-    <div id="bd">
-      <Nav>
-        <Nav.Item>
-          <Nav.Link href="/">Refresh</Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <Stack gap={2} className="col-md-6 mx-auto">
-        <Stack className="row-ml-6 mx-auto" gap={2}>
-          <h3 className="mb-2"> ICU Calculate</h3>
-        </Stack>
 
-        <InputGroup>
-          <Form.Control
-            onChange={(e) => setname(e.target.value)}
-            placeholder="Name"
-          />
-          <Form.Control
-            onChange={(e) => setmrn(e.target.value)}
-            placeholder="MRN"
-          />
-          <Form.Control
-            onChange={(e) => setww(e.target.value)}
-            placeholder="width"
-          />
-          <Form.Control
-            onChange={(e) => sethh(e.target.value)}
-            placeholder="height"
-          />
-          <Form.Control
+    } catch (error) {
+      
+    }
+    
+  };
+  const toast = useToast();
+  return (
+    <ChakraProvider>
+      <Box bg="#544b0b74" w="100%" p="4px" pt="11%" pb="4%">
+        <VStack>
+          <Text textColor="#d2791a" fontSize="70px">
+            {" "}
+            ICU Calculate
+          </Text>
+          <HStack>
+            {" "}
+            <Input
+              w="170px"
+      
+              textAlign="center"
+              onChange={(e) => setname(e.target.value)}
+              placeholder="Name"
+            />{" "}
+            <Input
+              w="100px"
+              textAlign="center"
+              onChange={(e) => setag(e.target.value)}
+              placeholder="age"
+            />
+            <Input
+              w="170px"
+              textAlign="center"
+             
+              onChange={(e) => setmrn(e.target.value)}
+              placeholder="MRN"
+            />{" "}
+            <RadioGroup defaultValue="2" onChange={setgender} value={gender}>
+              <Stack spacing={1} direction="row">
+                <Radio colorScheme="blue" value="male">
+                  Male
+                </Radio>
+                <Radio colorScheme="blue" value="female">
+                  Female
+                </Radio>
+              </Stack>
+            </RadioGroup>
+          </HStack>
+          <HStack>
+            {" "}
+            <Input
+              w="170px"
+              textAlign="center"
+              onChange={(e) => setww(e.target.value)}
+              placeholder="width"
+            />{" "}
+            <Input
+              w="170px"
+              textAlign="center"
+              onChange={(e) => sethh(e.target.value)}
+              placeholder="height"
+            />
+          </HStack>
+          <Input
+            textAlign="center"
             onChange={(e) => setdiagnosis(e.target.value)}
             placeholder="Diagnosis"
+            w="270px"
+            h="100px"
           />
-          <Form.Control
-            onChange={(e) => setag(e.target.value)}
-            placeholder="age"
-          />{" "}
-          <p> Male </p>
-          <input
-            onChange={(e) => setgender(e.target.value)}
-            type="radio"
-            name="gender"
-            id="male"
-            value="male"
-          ></input>
-          <br />
-          <p>Female</p>
-          <input
-            className="row-ml-6"
-            onChange={(e) => setgender(e.target.value)}
-            type="radio"
-            name="gender"
-            id="female"
-            value="female"
-          ></input>{" "}
-        </InputGroup>
-      </Stack>{" "}
-      <Stack className="col-md-6 mx-auto" gap={0}>
-        <hr />
-        {!name ? <></> : <h6>Name : {name}</h6>}
-        {!name ? <></> : <h6>Name : {ag}</h6>}
-        {!mrn ? <></> : <h6>MRN : {mrn}</h6>}
-        {!diagnosis ? <></> : <h6>Diagnosis : {diagnosis}</h6>}
-        {!res ? <></> : <h6>BMI : {res.toFixed(1)}</h6>}
-        {!res1 && !res2 ? (
-          <></>
-        ) : (
-          <h6>KCAL : {res1.toFixed(1) + " - " + res2.toFixed(1)}</h6>
-        )}
-        {!res3 ? <></> : <h6>IBW : {Math.round(res3)}</h6>}
-        {!res4 && !res5 ? (
-          <></>
-        ) : (
-          <h6>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</h6>
-        )}
-        {!res6 ? <></> : <h6>FLUID : {Math.round(res6)}</h6>}
-        {!res7 ? <></> : <h6>ADW : {Math.round(res7)}</h6>}
-        {/* <Text color="black" fontSize="12px">
-          on {e.time.slice(0, 10)} {e.time.slice(11, 16)}
-        </Text> */}
-        {/* <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner> */}
-        <button onClick={addpatient}>save</button>
-        <hr />
-        <input
-          onChange={(e) => setmrr(e.target.value)}
-          placeholder="Enter MRN"
-        ></input>
-        <hr />
-        <button onClick={result}>Get Patient data</button>
-        {patt.map((e) => {
-          return (
-            <>
-              <p>Register time: {e.time.slice(0, 10)}</p>
-              <p>Name: {e.name}</p>
-              <p>MRN: {e.mrn}</p>
-              <p>Age: {e.age}</p>
-              <p>Gender: {e.gender}</p>
-              <p>Diagnosis: {e.diagnosis}</p>
-              <p>Fluid: {e.fluid}</p>
-              <p>IBW: {e.ibw}</p>
-              <p>
-                KCAL Min: {e.kcal[0]}
-                <p>KCAL Max: {e.kcal[1]}</p>
-              </p>
 
-              <p>
-                Protien Min: {e.protein[0]}
-                <p>Protien Max: {e.protein[1]}</p>
-              </p>
-            </>
-          );
-        })}
-      </Stack>
-      <Card className="text-center">
-        <Card.Header>Only for noncommercial use</Card.Header>
-        <Card.Body>
-          <Card.Title>using this App only for personal purpose </Card.Title>
-          <Card.Text>
-            all results checked and tested by Nutrition Team
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer className="text-muted">
-          Coded by Sultan Alharbi <br />
-          All Rights Reserved © 2022
-        </Card.Footer>
-      </Card>
-    </div>
+          {!name ? <></> : <Text>Name : {name}</Text>}
+          {!ag ? <></> : <Text>Age : {ag}</Text>}
+          {!mrn ? <></> : <Text>MRN : {mrn}</Text>}
+          {!diagnosis ? <></> : <Text>Diagnosis : {diagnosis}</Text>}
+          {!res ? <></> : <Text>BMI : {res.toFixed(1)}</Text>}
+          {!res1 && !res2 ? (
+            <></>
+          ) : (
+            <Text>KCAL : {res1.toFixed(1) + " - " + res2.toFixed(1)}</Text>
+          )}
+          {!res3 ? <></> : <Text>IBW : {Math.round(res3)}</Text>}
+          {!res4 && !res5 ? (
+            <></>
+          ) : (
+            <Text>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</Text>
+          )}
+          {!res6 ? <></> : <Text>FLUID : {Math.round(res6)}</Text>}
+          {!res7 ? <></> : <Text>ADW : {Math.round(res7)}</Text>}
+          <Button colorScheme="gold" variant="outline" onClick={addpatient}>
+            save
+          </Button>
+          <Input
+            w="170px"
+            textAlign="center"
+            onChange={(e) => setmrr(e.target.value)}
+            placeholder="Enter MRN"
+          />
+          <Button colorScheme="gold" variant="outline" onClick={result}>
+            Get Patient data
+          </Button>
+          {patt.map((e) => {
+            return (
+              <>
+                <Text>Register time: {e.time.slice(0, 10)}</Text>
+                <Text>Name: {e.name}</Text>
+                <Text>MRN: {e.mrn}</Text>
+                <Text>Age: {e.age}</Text>
+                <Text>Gender: {e.gender}</Text>
+                <Text>Diagnosis: {e.diagnosis}</Text>
+                <Text>Fluid: {e.fluid}</Text>
+                <Text>IBW: {e.ibw}</Text>
+                <HStack>
+                  <Text>KCAL: {e.kcal[0]}</Text>
+                  <Text>- {e.kcal[1]}</Text>
+                </HStack>
+                <HStack>
+                  <Text>Protien: {e.protein[0]}</Text>
+                  <Text>- {e.protein[1]}</Text>
+                  {e.protein[1]}
+                </HStack>
+              </>
+            );
+          })}
+        </VStack>{" "}
+      </Box>
+    </ChakraProvider>
   );
 };
 
