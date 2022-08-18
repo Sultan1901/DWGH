@@ -12,7 +12,9 @@ import {
   Radio,
   RadioGroup,
   Stack,
+  SimpleGrid,
 } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 
 const Nutrition = () => {
   const [ww, setww] = useState(0);
@@ -147,12 +149,13 @@ const Nutrition = () => {
   const toast = useToast();
   return (
     <ChakraProvider>
-      <Box bg="#ebeaea" w="100%" p="4px" pb="9">
+      <Box bg="#ebeaea"  w="100%" p="4px" mb='100px'>
         <VStack>
           <Text textColor="#d2791a" fontSize="70px">
             {" "}
             ICU Calculate
           </Text>
+          
           <HStack>
             {" "}
             <Input
@@ -275,27 +278,50 @@ const Nutrition = () => {
           {patt.map((e) => {
             return (
               <>
-                <Text>Register time: {e.time.slice(0, 10)}</Text>
-                <Text>Name: {e.name}</Text>
-                <Text>MRN: {e.mrn}</Text>
-                <Text>Age: {e.age}</Text>
-                <Text>Gender: {e.gender}</Text>
-                <Text>Diagnosis: {e.diagnosis}</Text>
-                <Text>Fluid: {e.fluid}</Text>
-                <Text>IBW: {e.ibw}</Text>
-                <HStack>
-                  <Text>KCAL: {e.kcal[0]}</Text>
-                  <Text>- {e.kcal[1]}</Text>
-                </HStack>
-                <HStack>
-                  <Text>Protien: {e.protein[0]}</Text>
-                  <Text>- {e.protein[1]}</Text>
-                  {e.protein[1]}
-                </HStack>
+                <SimpleGrid align="center" height="180px" fontSize='20px' fontWeight='bold'  columns={3} spacing={5}>
+                  <Box  bg="silver" >
+                    Register time: {e.time.slice(0, 10)}
+                  </Box>
+                  <Box  bg="silver" >
+                    Name: {e.name}
+                  </Box>
+                  <Box  bg="silver" >
+                    MRN: {e.mrn}
+                  </Box>
+                  <Box  bg="silver" >
+                    Age: {e.age}
+                  </Box>
+                  <Box  bg="silver" >
+                    Gender: {e.gender}
+                  </Box>
+                  <Box  bg="silver" >
+                    Diagnosis: {e.diagnosis}
+                  </Box>{" "}
+                  <Box  bg="silver" >
+                    Fluid: {e.fluid}
+                  </Box>{" "}
+                  <Box  bg="silver" >
+                    IBW: {e.ibw}
+                  </Box>
+                  <Box  bg="silver" >
+                    
+                      <Text >KCAL: {e.kcal[0]} - {e.kcal[1]}</Text>
+                      <Text></Text>
+                    
+                  </Box>
+                  <Box  bg="silver" >
+                    
+                      <Text>Protien: {e.protein[0]} - {e.protein[1]}</Text>
+                      
+                     
+                    
+                  </Box>
+                </SimpleGrid>
               </>
             );
           })}
         </VStack>{" "}
+        <Text mb='20' align="center" fontSize="50">lorem ipsum dolor sit amet, consectetur adip</Text>
       </Box>
     </ChakraProvider>
   );
