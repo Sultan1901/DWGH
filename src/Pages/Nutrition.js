@@ -5,15 +5,10 @@ import {
   Box,
   Text,
   VStack,
-  // theme,
-  // Select,
   Input,
   Button,
-  // Link,
   HStack,
   useToast,
-  // CircularProgress,
-  // Textarea,
   Radio,
   RadioGroup,
   Stack,
@@ -44,7 +39,7 @@ const Nutrition = () => {
 
   useEffect(() => {
     result();
-  },[]);
+  }, []);
 
   const CUL = () => {
     const BMI = (w, h) => {
@@ -105,6 +100,7 @@ const Nutrition = () => {
 
   const addpatient = async () => {
     try {
+      // eslint-disable-next-line
       const insert = await axios.post(`https://dwgh.herokuapp.com/addPatient`, {
         name: name,
         mrn: mrn,
@@ -118,13 +114,13 @@ const Nutrition = () => {
         fluid: Math.round(res6),
         adw: Math.round(res7),
       });
-       toast({
-         title: "Done !",
-         description: "Patient added successfuly",
-         status: "success",
-         duration: 5000,
-         isClosable: true,
-       });
+      toast({
+        title: "Done !",
+        description: "Patient added successfuly",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     } catch (error) {
       toast({
         title: "An error occurred.",
@@ -138,25 +134,20 @@ const Nutrition = () => {
 
   const result = async () => {
     try {
-   
+      // eslint-disable-next-line
       const data = await axios
-      .get(`https://dwgh.herokuapp.com/getPatient/${mrr}`, {
-        mrn: mrr,
-      })
-      .then((result) => {
-        setpatt(result.data);
-       
-      });
-
-    } catch (error) {
-      
-    }
-    
+        .get(`https://dwgh.herokuapp.com/getPatient/${mrr}`, {
+          mrn: mrr,
+        })
+        .then((result) => {
+          setpatt(result.data);
+        });
+    } catch (error) {}
   };
   const toast = useToast();
   return (
     <ChakraProvider>
-      <Box bg="#544b0b74" w="100%" p="4px" pt="11%" pb="4%">
+      <Box bg="#ebeaea" w="100%" p="4px" pb="9%">
         <VStack>
           <Text textColor="#d2791a" fontSize="70px">
             {" "}
@@ -165,31 +156,43 @@ const Nutrition = () => {
           <HStack>
             {" "}
             <Input
+              isInvalid
+              errorBorderColor="black"
               w="170px"
-      
               textAlign="center"
               onChange={(e) => setname(e.target.value)}
               placeholder="Name"
+              _placeholder={{ color: "inherit" }}
+              color="#0f13f1"
             />{" "}
             <Input
+              isInvalid
+              errorBorderColor="black"
+              w="170px"
+              textAlign="center"
+              onChange={(e) => setmrn(e.target.value)}
+              placeholder="MRN"
+              _placeholder={{ color: "inherit" }}
+              color="#0f13f1"
+            />
+          </HStack>
+          <HStack>
+            <Input
+              isInvalid
+              errorBorderColor="black"
               w="100px"
               textAlign="center"
               onChange={(e) => setag(e.target.value)}
               placeholder="age"
-            />
-            <Input
-              w="170px"
-              textAlign="center"
-             
-              onChange={(e) => setmrn(e.target.value)}
-              placeholder="MRN"
+              _placeholder={{ color: "inherit" }}
+              color="#0f13f1"
             />{" "}
             <RadioGroup defaultValue="2" onChange={setgender} value={gender}>
               <Stack spacing={1} direction="row">
-                <Radio colorScheme="blue" value="male">
+                <Radio isInvalid colorScheme="blue" value="male">
                   Male
                 </Radio>
-                <Radio colorScheme="blue" value="female">
+                <Radio isInvalid colorScheme="blue" value="female">
                   Female
                 </Radio>
               </Stack>
@@ -198,24 +201,36 @@ const Nutrition = () => {
           <HStack>
             {" "}
             <Input
-              w="170px"
-              textAlign="center"
-              onChange={(e) => setww(e.target.value)}
-              placeholder="width"
-            />{" "}
-            <Input
+              isInvalid
+              errorBorderColor="black"
               w="170px"
               textAlign="center"
               onChange={(e) => sethh(e.target.value)}
               placeholder="height"
+              _placeholder={{ color: "inherit" }}
+              color="#0f13f1"
+            />{" "}
+            <Input
+              isInvalid
+              errorBorderColor="black"
+              w="170px"
+              textAlign="center"
+              onChange={(e) => setww(e.target.value)}
+              placeholder="width"
+              _placeholder={{ color: "inherit" }}
+              color="#0f13f1"
             />
           </HStack>
           <Input
+            isInvalid
+            errorBorderColor="black"
             textAlign="center"
             onChange={(e) => setdiagnosis(e.target.value)}
             placeholder="Diagnosis"
             w="270px"
             h="100px"
+            _placeholder={{ color: "inherit" }}
+            color="#0f13f1"
           />
 
           {!name ? <></> : <Text>Name : {name}</Text>}
@@ -240,14 +255,19 @@ const Nutrition = () => {
             save
           </Button>
           <Input
+            isInvalid
+            errorBorderColor="black"
             w="170px"
             textAlign="center"
             onChange={(e) => setmrr(e.target.value)}
             placeholder="Enter MRN"
+            _placeholder={{ color: "inherit" }}
+            color="#0f13f1"
           />
           <Button colorScheme="gold" variant="outline" onClick={result}>
             Get Patient data
           </Button>
+
           {patt.map((e) => {
             return (
               <>
