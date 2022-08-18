@@ -147,7 +147,7 @@ const Nutrition = () => {
   const toast = useToast();
   return (
     <ChakraProvider>
-      <Box bg="#ebeaea" w="100%" p="4px" pb="9%">
+      <Box bg="#ebeaea" w="100%" p="4px" pb="9">
         <VStack>
           <Text textColor="#d2791a" fontSize="70px">
             {" "}
@@ -254,6 +254,10 @@ const Nutrition = () => {
           <Button colorScheme="gold" variant="outline" onClick={addpatient}>
             save
           </Button>
+          <hr />
+          <br />
+          <hr />
+
           <Input
             isInvalid
             errorBorderColor="black"
