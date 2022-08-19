@@ -156,7 +156,7 @@ const Nutrition = () => {
           setpatt(result.data);
            toast({
              title: "Data Loaded successfuly!",
-            
+            position: "top",
              status: "success",
              duration: 4000,
              isClosable: true,
@@ -164,7 +164,7 @@ const Nutrition = () => {
         });
     } catch (error) {toast({
       title: "Patient Not exists",
-     
+      position: "top",
       status: "error",
       duration: 4000,
       isClosable: true,
