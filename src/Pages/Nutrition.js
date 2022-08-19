@@ -149,7 +149,7 @@ const Nutrition = () => {
   const toast = useToast();
   return (
     <ChakraProvider>
-      <Box bg="#ebeaea"  w="100%" p="4px" mb='100px'>
+      <Box bg="#ebeaea"  h="1000" p="4px" mb='100px'>
         <VStack>
           <Text textColor="#d2791a" fontSize="70px">
             {" "}
@@ -321,8 +321,9 @@ const Nutrition = () => {
             );
           })}
         </VStack>{" "}
-        <Text mb='20' align="center" fontSize="50">lorem ipsum dolor sit amet, consectetur adip</Text>
+        
       </Box>
+     
     </ChakraProvider>
   );
 };
