@@ -4,10 +4,12 @@ import { ChakraProvider, Box } from "@chakra-ui/react";
 
 function App() {
   return (
-    <ChakraProvider >
-      <Box><>
-        <Nutrition />
-     </> </Box>
+    <ChakraProvider>
+      <Box bg="#ebeaea">
+        <>
+          <Nutrition />
+        </>{" "}
+      </Box>
     </ChakraProvider>
   );
 }

@@ -149,13 +149,15 @@ const Nutrition = () => {
   const toast = useToast();
   return (
     <ChakraProvider>
-      <Box bg="#ebeaea"  h="1000" p="4px" mb='100px'>
+      <Box>
         <VStack>
-          <Text textColor="#d2791a" fontSize="70px">
-            {" "}
-            ICU Calculate
-          </Text>
-          
+          <Box w="100%" bg="#383974">
+            <Text color="yellow" align="center" fontSize="70px">
+              {" "}
+              ICU Calculate
+            </Text>
+          </Box>
+
           <HStack>
             {" "}
             <Input
@@ -257,8 +259,7 @@ const Nutrition = () => {
           <Button colorScheme="gold" variant="outline" onClick={addpatient}>
             save
           </Button>
-          <hr />
-          <br />
+
           <hr />
 
           <Input
@@ -278,52 +279,44 @@ const Nutrition = () => {
           {patt.map((e) => {
             return (
               <>
-                <SimpleGrid align="center" height="180px" fontSize='20px' fontWeight='bold'  columns={3} spacing={5}>
-                  <Box  bg="silver" >
-                    Register time: {e.time.slice(0, 10)}
+                <SimpleGrid
+                  align="center"
+                  height="180px"
+                  fontSize="20px"
+                  fontWeight="bold"
+                  columns={3}
+                  spacing={2}
+                >
+                  <Box bg="silver">Register time: {e.time.slice(0, 10)}</Box>
+                  <Box bg="silver">Name: {e.name}</Box>
+                  <Box bg="silver">MRN: {e.mrn}</Box>
+                  <Box bg="silver">Age: {e.age}</Box>
+                  <Box bg="silver">Gender: {e.gender}</Box>
+                  <Box bg="silver">Diagnosis: {e.diagnosis}</Box>{" "}
+                  <Box bg="silver">Fluid: {e.fluid}</Box>{" "}
+                  <Box bg="silver">IBW: {e.ibw}</Box>
+                  <Box bg="silver">
+                    <Text>
+                      KCAL: {e.kcal[0]} - {e.kcal[1]}
+                    </Text>
+                    <Text></Text>
                   </Box>
-                  <Box  bg="silver" >
-                    Name: {e.name}
-                  </Box>
-                  <Box  bg="silver" >
-                    MRN: {e.mrn}
-                  </Box>
-                  <Box  bg="silver" >
-                    Age: {e.age}
-                  </Box>
-                  <Box  bg="silver" >
-                    Gender: {e.gender}
-                  </Box>
-                  <Box  bg="silver" >
-                    Diagnosis: {e.diagnosis}
-                  </Box>{" "}
-                  <Box  bg="silver" >
-                    Fluid: {e.fluid}
-                  </Box>{" "}
-                  <Box  bg="silver" >
-                    IBW: {e.ibw}
-                  </Box>
-                  <Box  bg="silver" >
-                    
-                      <Text >KCAL: {e.kcal[0]} - {e.kcal[1]}</Text>
-                      <Text></Text>
-                    
-                  </Box>
-                  <Box  bg="silver" >
-                    
-                      <Text>Protien: {e.protein[0]} - {e.protein[1]}</Text>
-                      
-                     
-                    
+                  <Box bg="silver">
+                    <Text>
+                      Protien: {e.protein[0]} - {e.protein[1]}
+                    </Text>
                   </Box>
                 </SimpleGrid>
               </>
             );
           })}
         </VStack>{" "}
-        
       </Box>
-     
+      <Box mt="5" p="1.5" bg="#383974">
+        <Text fontWeight="bold" fontSize="20px" color="yellow" align="center">
+          Coded by Sultan Alharbi - All rights reserved © 2022
+        </Text>
+      </Box>
     </ChakraProvider>
   );
 };
