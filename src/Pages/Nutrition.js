@@ -13,7 +13,6 @@ import {
   RadioGroup,
   Stack,
   SimpleGrid,
-  Spinner,
 } from "@chakra-ui/react";
 
 const Nutrition = () => {
@@ -34,25 +33,16 @@ const Nutrition = () => {
   const [res7, setres7] = useState(0);
   const [patt, setpatt] = useState([]);
   const [mrr, setmrr] = useState(0);
-
   useEffect(() => {
     CUL();
   });
-
-  // useEffect(() => {
-  //   result();
-  // }, [mrr]);
-
   const CUL = () => {
     const BMI = (w, h) => {
       w = ww;
       h = hh;
-
       setres(ww / hh / hh);
-
       const IBW = (g) => {
         g = gender;
-
         if (gender === "male") {
           setres3(hh * hh * 24);
         } else if (gender === "female") {
@@ -73,7 +63,6 @@ const Nutrition = () => {
         }
       };
       KCAL();
-
       const FLUID = (age) => {
         age = ag;
         if (age > 18 && res > 30 && gender === "male")
@@ -83,7 +72,6 @@ const Nutrition = () => {
         else if (age > 18 && res < 30) return setres6(ww * 30);
       };
       FLUID();
-
       const PROTEIN = () => {
         if (res < 30) {
           return setres4(ww * 1.2) + setres5(ww * 2);
@@ -99,7 +87,6 @@ const Nutrition = () => {
     };
     BMI();
   };
-
   const addpatient = async () => {
     try {
       // eslint-disable-next-line
@@ -120,7 +107,7 @@ const Nutrition = () => {
         title: "Done !",
         description: "Patient added successfuly",
         status: "success",
-        duration: 4000,
+        duration: 3000,
         isClosable: true,
       });
     } catch (error) {
@@ -128,23 +115,12 @@ const Nutrition = () => {
         title: "An error occurred.",
         description: "Patient already exists",
         status: "error",
-        duration: 4000,
+        duration: 3000,
         isClosable: true,
       });
     }
   };
 
-  // const myTimeout = () => {
-  //   setTimeout(result, 2000);
-  // };
-  // const positions = [
-  //       "top",
-  //       "top-right",
-  //       "top-left",
-  //       "bottom",
-  //       "bottom-right",
-  //       "bottom-left",
-  //     ];
   const result = async () => {
     try {
       // eslint-disable-next-line
@@ -154,20 +130,34 @@ const Nutrition = () => {
         })
         .then((result) => {
           setpatt(result.data);
-         
+          toast({
+            title: "Done !",
+            description: "Patient Data Loaded successfuly",
+            status: "success",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          });
         });
     } catch (error) {
-      
+      toast({
+        title: "An error occurred.",
+        description: "Patient Not Found",
+        position: "top",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
   const toast = useToast();
 
   return (
     <ChakraProvider>
-      <Box>
+      <Box h='100%'>
         <VStack>
           <Box w="100%" bg="#383974">
-            <Text color="yellow" align="center" fontSize="50px">
+            <Text color="yellow" align="center" fontSize="40px">
               {" "}
               ICU Calculate
             </Text>
@@ -203,7 +193,7 @@ const Nutrition = () => {
               w="100px"
               textAlign="center"
               onChange={(e) => setag(e.target.value)}
-              placeholder="age"
+              placeholder="Age"
               _placeholder={{ color: "inherit" }}
               color="#0f13f1"
             />{" "}
@@ -226,7 +216,7 @@ const Nutrition = () => {
               w="170px"
               textAlign="center"
               onChange={(e) => sethh(e.target.value)}
-              placeholder="height"
+              placeholder="Height"
               _placeholder={{ color: "inherit" }}
               color="#0f13f1"
             />{" "}
@@ -236,7 +226,7 @@ const Nutrition = () => {
               w="170px"
               textAlign="center"
               onChange={(e) => setww(e.target.value)}
-              placeholder="width"
+              placeholder="Width"
               _placeholder={{ color: "inherit" }}
               color="#0f13f1"
             />
@@ -248,30 +238,12 @@ const Nutrition = () => {
             onChange={(e) => setdiagnosis(e.target.value)}
             placeholder="Diagnosis"
             w="270px"
-            h="100px"
+            h="60px"
             _placeholder={{ color: "inherit" }}
             color="#0f13f1"
           />
-          {/* 
-          {!name ? <></> : <Text>Name : {name}</Text>}
-          {!ag ? <></> : <Text>Age : {ag}</Text>}
-          {!mrn ? <></> : <Text>MRN : {mrn}</Text>}
-          {!diagnosis ? <></> : <Text>Diagnosis : {diagnosis}</Text>}
-          {!res ? <></> : <Text>BMI : {res.toFixed(1)}</Text>}
-          {!res1 && !res2 ? (
-            <></>
-          ) : (
-            <Text>KCAL : {res1.toFixed(1) + " - " + res2.toFixed(1)}</Text>
-          )}
-          {!res3 ? <></> : <Text>IBW : {Math.round(res3)}</Text>}
-          {!res4 && !res5 ? (
-            <></>
-          ) : (
-            <Text>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</Text>
-          )}
-          {!res6 ? <></> : <Text>FLUID : {Math.round(res6)}</Text>}
-          {!res7 ? <></> : <Text>ADW : {Math.round(res7)}</Text>} */}
-          <Button colorScheme="gold" variant="outline" onClick={addpatient}>
+
+          <Button colorScheme="teal" variant="outline" onClick={addpatient}>
             save
           </Button>
 
@@ -287,46 +259,65 @@ const Nutrition = () => {
             _placeholder={{ color: "inherit" }}
             color="#0f13f1"
           />
-          <Button colorScheme="gold" variant="outline" onClick={result}>
+          <Button colorScheme="teal" variant="outline" onClick={result}>
             Get Patient data
           </Button>
-
-          {patt.map((e) => {
-            return (
-              <>
-                <SimpleGrid
-                  align="center"
-                  height="180px"
-                  fontSize="20px"
-                  fontWeight="bold"
-                  columns={3}
-                  spacing={2}
-                >
-                  <Box bg="silver">Register time: {e.time.slice(0, 10)}</Box>
-                  <Box bg="silver">Name: {e.name}</Box>
-                  <Box bg="silver">MRN: {e.mrn}</Box>
-                  <Box bg="silver">Age: {e.age}</Box>
-                  <Box bg="silver">Gender: {e.gender}</Box>
-                  <Box bg="silver">Diagnosis: {e.diagnosis}</Box>{" "}
-                  <Box bg="silver">Fluid: {e.fluid}</Box>{" "}
-                  <Box bg="silver">IBW: {e.ibw}</Box>
-                  <Box bg="silver">
-                    <Text>
+          <Box  h='135px'>
+            {patt.map((e) => {
+              return (
+                <>
+                  <SimpleGrid
+                    align="center"
+                    fontSize="15px"
+                    fontWeight="bold"
+                    columns={5}
+                    spacing={4}
+                    mb='100px'
+                   
+                    
+                  >
+                    
+                    <Box borderRadius="3px" bg="silver">
+                      Register date: {e.time.slice(0, 10)}
+                    </Box>
+                    <Box borderRadius="3px" bg="silver">
+                      Name: {e.name}
+                    </Box>
+                    <Box borderRadius="3px" bg="silver">
+                      MRN: {e.mrn}
+                    </Box>
+                    <Box borderRadius="3px" bg="silver">
+                      Age: {e.age}
+                    </Box>
+                    <Box borderRadius="3px" bg="silver">
+                      Gender: {e.gender}
+                    </Box>
+                    <Box borderRadius="3px" bg="silver">
+                      Diagnosis: {e.diagnosis}
+                    </Box>{" "}
+                    <Box borderRadius="3px" bg="silver">
+                      Fluid: {e.fluid}
+                    </Box>{" "}
+                    <Box borderRadius="3px" bg="silver">
+                      IBW: {e.ibw}
+                    </Box>
+                    <Box borderRadius="3px" bg="silver">
                       KCAL: {e.kcal[0]} - {e.kcal[1]}
-                    </Text>
-                  </Box>
-                  <Box bg="silver">
-                    <Text>
+                    </Box>
+                    <Box borderRadius="3px" bg="silver">
                       Protien: {e.protein[0]} - {e.protein[1]}
-                    </Text>
-                  </Box>
-                </SimpleGrid>
-              </>
-            );
-          })}
+                    </Box>
+                  </SimpleGrid>
+                </>
+              );
+            })}
+          </Box>
         </VStack>{" "}
       </Box>
-      <Box position="end" mt="12" p="1.5" bg="#383974">
+      <Box  position="fixed" bottom="0" w="100%" p="1.5" bg="#383974">
+        <Text fontSize="13px" color="yellow" align="center">
+          All Results Tested And Confermed by Nutrition Team
+        </Text>
         <Text fontWeight="bold" fontSize="20px" color="yellow" align="center">
           Coded by Sultan Alharbi - All rights reserved © 2022
         </Text>
