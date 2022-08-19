@@ -13,8 +13,8 @@ import {
   RadioGroup,
   Stack,
   SimpleGrid,
+  Spinner,
 } from "@chakra-ui/react";
-import { Grid, GridItem } from "@chakra-ui/react";
 
 const Nutrition = () => {
   const [ww, setww] = useState(0);
@@ -39,9 +39,9 @@ const Nutrition = () => {
     CUL();
   });
 
-  useEffect(() => {
-    result();
-  }, []);
+  // useEffect(() => {
+  //   result();
+  // }, [mrr]);
 
   const CUL = () => {
     const BMI = (w, h) => {
@@ -120,7 +120,7 @@ const Nutrition = () => {
         title: "Done !",
         description: "Patient added successfuly",
         status: "success",
-        duration: 5000,
+        duration: 4000,
         isClosable: true,
       });
     } catch (error) {
@@ -128,12 +128,23 @@ const Nutrition = () => {
         title: "An error occurred.",
         description: "Patient already exists",
         status: "error",
-        duration: 5000,
+        duration: 4000,
         isClosable: true,
       });
     }
   };
 
+  // const myTimeout = () => {
+  //   setTimeout(result, 2000);
+  // };
+  // const positions = [
+  //       "top",
+  //       "top-right",
+  //       "top-left",
+  //       "bottom",
+  //       "bottom-right",
+  //       "bottom-left",
+  //     ];
   const result = async () => {
     try {
       // eslint-disable-next-line
@@ -143,16 +154,30 @@ const Nutrition = () => {
         })
         .then((result) => {
           setpatt(result.data);
+           toast({
+             title: "Data Loaded successfuly!",
+            
+             status: "success",
+             duration: 4000,
+             isClosable: true,
+           });
         });
-    } catch (error) {}
+    } catch (error) {toast({
+      title: "Patient Not exists",
+     
+      status: "error",
+      duration: 4000,
+      isClosable: true,
+    });}
   };
   const toast = useToast();
+
   return (
     <ChakraProvider>
       <Box>
         <VStack>
           <Box w="100%" bg="#383974">
-            <Text color="yellow" align="center" fontSize="70px">
+            <Text color="yellow" align="center" fontSize="50px">
               {" "}
               ICU Calculate
             </Text>
@@ -193,11 +218,11 @@ const Nutrition = () => {
               color="#0f13f1"
             />{" "}
             <RadioGroup defaultValue="2" onChange={setgender} value={gender}>
-              <Stack spacing={1} direction="row">
-                <Radio isInvalid colorScheme="blue" value="male">
+              <Stack spacing={2} direction="row">
+                <Radio isInvalid colorScheme="red" value="male">
                   Male
                 </Radio>
-                <Radio isInvalid colorScheme="blue" value="female">
+                <Radio isInvalid colorScheme="red" value="female">
                   Female
                 </Radio>
               </Stack>
@@ -237,7 +262,7 @@ const Nutrition = () => {
             _placeholder={{ color: "inherit" }}
             color="#0f13f1"
           />
-
+          {/* 
           {!name ? <></> : <Text>Name : {name}</Text>}
           {!ag ? <></> : <Text>Age : {ag}</Text>}
           {!mrn ? <></> : <Text>MRN : {mrn}</Text>}
@@ -255,7 +280,7 @@ const Nutrition = () => {
             <Text>PROTEIN : {Math.round(res4) + " - " + Math.round(res5)}</Text>
           )}
           {!res6 ? <></> : <Text>FLUID : {Math.round(res6)}</Text>}
-          {!res7 ? <></> : <Text>ADW : {Math.round(res7)}</Text>}
+          {!res7 ? <></> : <Text>ADW : {Math.round(res7)}</Text>} */}
           <Button colorScheme="gold" variant="outline" onClick={addpatient}>
             save
           </Button>
@@ -299,7 +324,6 @@ const Nutrition = () => {
                     <Text>
                       KCAL: {e.kcal[0]} - {e.kcal[1]}
                     </Text>
-                    <Text></Text>
                   </Box>
                   <Box bg="silver">
                     <Text>
@@ -312,7 +336,7 @@ const Nutrition = () => {
           })}
         </VStack>{" "}
       </Box>
-      <Box mt="5" p="1.5" bg="#383974">
+      <Box position="end" mt="12" p="1.5" bg="#383974">
         <Text fontWeight="bold" fontSize="20px" color="yellow" align="center">
           Coded by Sultan Alharbi - All rights reserved © 2022
         </Text>
