@@ -301,6 +301,9 @@ const Nutrition = () => {
                     <Box borderRadius="3px" bg="silver">
                       IBW: {e.ibw}
                     </Box>
+<Box borderRadius="3px" bg="silver">
+                      ADW: {e.adw}
+                    </Box>
                     <Box borderRadius="3px" bg="silver">
                       KCAL: {e.kcal[0]} - {e.kcal[1]}
                     </Box>
