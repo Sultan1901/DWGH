@@ -226,7 +226,7 @@ const Nutrition = () => {
               w="170px"
               textAlign="center"
               onChange={(e) => setww(e.target.value)}
-              placeholder="Width"
+              placeholder="Weight"
               _placeholder={{ color: "inherit" }}
               color="#0f13f1"
             />
