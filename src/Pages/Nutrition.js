@@ -185,6 +185,17 @@ const Nutrition = () => {
               _placeholder={{ color: "inherit" }}
               color="#0f13f1"
             />
+                <Input
+            isInvalid
+            errorBorderColor="black"
+            textAlign="center"
+            onChange={(e) => setdiagnosis(e.target.value)}
+            placeholder="Diagnosis"
+            w="170px"
+          
+            _placeholder={{ color: "inherit" }}
+            color="#0f13f1"
+          />
           </HStack>
           <HStack>
             <Input
@@ -231,17 +242,7 @@ const Nutrition = () => {
               color="#0f13f1"
             />
           </HStack>
-          <Input
-            isInvalid
-            errorBorderColor="black"
-            textAlign="center"
-            onChange={(e) => setdiagnosis(e.target.value)}
-            placeholder="Diagnosis"
-            w="270px"
-            h="60px"
-            _placeholder={{ color: "inherit" }}
-            color="#0f13f1"
-          />
+          
 
           <Button colorScheme="teal" variant="outline" onClick={addpatient}>
             save
