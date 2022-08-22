@@ -196,6 +196,17 @@ const Nutrition = () => {
               _placeholder={{ color: "inherit" }}
               color="#0f13f1"
             />
+                <Input
+            isInvalid
+            errorBorderColor="black"
+            textAlign="center"
+            onChange={(e) => setdiagnosis(e.target.value)}
+            placeholder="Diagnosis"
+            w="170px"
+          
+            _placeholder={{ color: "inherit" }}
+            color="#0f13f1"
+          />
           </HStack>
           <HStack>
             <Input
@@ -237,22 +248,12 @@ const Nutrition = () => {
               w="170px"
               textAlign="center"
               onChange={(e) => setww(e.target.value)}
-              placeholder="Width"
+              placeholder="Weight"
               _placeholder={{ color: "inherit" }}
               color="#0f13f1"
             />
           </HStack>
-          <Input
-            isInvalid
-            errorBorderColor="black"
-            textAlign="center"
-            onChange={(e) => setdiagnosis(e.target.value)}
-            placeholder="Diagnosis"
-            w="270px"
-            h="60px"
-            _placeholder={{ color: "inherit" }}
-            color="#0f13f1"
-          />
+          
 
           {!Click1 ? (
             <></>
@@ -365,6 +366,9 @@ const Nutrition = () => {
                     </Box>{" "}
                     <Box borderRadius="3px" bg="silver">
                       IBW: {e.ibw}
+                    </Box>
+<Box borderRadius="3px" bg="silver">
+                      ADW: {e.adw}
                     </Box>
                     <Box borderRadius="3px" bg="silver">
                       KCAL: {e.kcal[0]} - {e.kcal[1]}
