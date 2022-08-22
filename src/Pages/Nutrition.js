@@ -13,10 +13,6 @@ import {
   RadioGroup,
   Stack,
   SimpleGrid,
-  Table,
-  Tr,
-  Td,
-  TableContainer,
 } from "@chakra-ui/react";
 import { useReactToPrint } from "react-to-print";
 const Nutrition = () => {
@@ -196,17 +192,16 @@ const Nutrition = () => {
               _placeholder={{ color: "inherit" }}
               color="#0f13f1"
             />
-                <Input
-            isInvalid
-            errorBorderColor="black"
-            textAlign="center"
-            onChange={(e) => setdiagnosis(e.target.value)}
-            placeholder="Diagnosis"
-            w="170px"
-          
-            _placeholder={{ color: "inherit" }}
-            color="#0f13f1"
-          />
+            <Input
+              isInvalid
+              errorBorderColor="black"
+              textAlign="center"
+              onChange={(e) => setdiagnosis(e.target.value)}
+              placeholder="Diagnosis"
+              w="170px"
+              _placeholder={{ color: "inherit" }}
+              color="#0f13f1"
+            />
           </HStack>
           <HStack>
             <Input
@@ -253,59 +248,51 @@ const Nutrition = () => {
               color="#0f13f1"
             />
           </HStack>
-          
 
           {!Click1 ? (
             <></>
           ) : (
-            <TableContainer>
-              <Table bg="#383974" border="solid yellow" variant="simple">
-                <Tr>
-                  <Td>name: </Td>
-                  <Td>{name}</Td>
-                  <Td>MRN: </Td>
-                  <Td>{mrn}</Td> <Td>Age: </Td>
-                  <Td>{ag}</Td> <Td>gender: </Td>
-                  <Td>{gender}</Td>
-                </Tr>
-                <Tr>
-                  <Td>diagnosis: </Td>
-                  <Td>{diagnosis}</Td>
-                </Tr>
-                <Tr>
-                  <Td>BMI: </Td>
-                  <Td>{res.toFixed(1)}</Td>
-                </Tr>{" "}
-                <Tr>
-                  {" "}
-                  <Td>KCAL: </Td>
-                  <Td>
-                    {res1.toFixed(1)} - {res2.toFixed(1)}
-                  </Td>
-                </Tr>
-                <Tr>
-                  {" "}
-                  <Td>IBW: </Td>
-                  <Td>{Math.round(res3)}</Td>
-                </Tr>
-                <Tr>
-                  {" "}
-                  <Td>Protien: </Td>
-                  <Td>
-                    {Math.round(res4)} - {Math.round(res5)}
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td>Fluid: </Td>
-                  <Td>{Math.round(res6)}</Td>
-                </Tr>
-                <Tr>
-                  {" "}
-                  <Td>ADW: </Td>
-                  <Td>{Math.round(res7)}</Td>
-                </Tr>
-              </Table>
-            </TableContainer>
+            <SimpleGrid
+              align="center"
+              fontSize="15px"
+              fontWeight="bold"
+              columns={5}
+              spacing={4}
+              mb="100px"
+              border="black solid 2px "
+              p="3"
+            >
+              <Box borderRadius="3px" bg="silver">
+                Name: {name}
+              </Box>
+              <Box borderRadius="3px" bg="silver">
+                MRN: {mrn}
+              </Box>
+              <Box borderRadius="3px" bg="silver">
+                Age: {ag}
+              </Box>
+              <Box borderRadius="3px" bg="silver">
+                Gender: {gender}
+              </Box>
+              <Box borderRadius="3px" bg="silver">
+                Diagnosis: {diagnosis}
+              </Box>{" "}
+              <Box borderRadius="3px" bg="silver">
+                Fluid: {Math.round(res6)}
+              </Box>{" "}
+              <Box borderRadius="3px" bg="silver">
+                IBW: {Math.round(res3)}
+              </Box>
+              <Box borderRadius="3px" bg="silver">
+                ADW: {Math.round(res7)}
+              </Box>
+              <Box borderRadius="3px" bg="silver">
+                KCAL: {res1.toFixed()} - {res2.toFixed()}
+              </Box>
+              <Box borderRadius="3px" bg="silver">
+                Protien: {Math.round(res4)} - {Math.round(res5)}
+              </Box>
+            </SimpleGrid>
           )}
           <Button colorScheme="teal" variant="outline" onClick={Click}>
             Calculate
@@ -367,7 +354,7 @@ const Nutrition = () => {
                     <Box borderRadius="3px" bg="silver">
                       IBW: {e.ibw}
                     </Box>
-<Box borderRadius="3px" bg="silver">
+                    <Box borderRadius="3px" bg="silver">
                       ADW: {e.adw}
                     </Box>
                     <Box borderRadius="3px" bg="silver">
