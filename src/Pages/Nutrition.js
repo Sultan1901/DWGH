@@ -160,18 +160,25 @@ const Nutrition = () => {
   const Click = () => {
     setClick1(true);
   };
+  const refresh = () => {
+    window.location.reload(false);
+  };
   return (
     <ChakraProvider>
       <Box h="100%">
         <VStack>
-          <Box w="100%" bg="#383974">
+          <Box w="100%" bg="black">
             <Text color="yellow" align="center" fontSize="40px">
               {" "}
               ICU Calculate
             </Text>
           </Box>
           <HStack>
-            {" "}
+            <HStack>
+              <Button colorScheme="teal" variant="outline" onClick={refresh}>
+                Refresh
+              </Button>
+            </HStack>{" "}
             <Input
               isInvalid
               errorBorderColor="black"
@@ -180,7 +187,7 @@ const Nutrition = () => {
               onChange={(e) => setname(e.target.value)}
               placeholder="Name"
               _placeholder={{ color: "inherit" }}
-              color="#0f13f1"
+              color="black"
             />{" "}
             <Input
               isInvalid
@@ -190,7 +197,7 @@ const Nutrition = () => {
               onChange={(e) => setmrn(e.target.value)}
               placeholder="MRN"
               _placeholder={{ color: "inherit" }}
-              color="#0f13f1"
+              color="black"
             />
             <Input
               isInvalid
@@ -200,7 +207,7 @@ const Nutrition = () => {
               placeholder="Diagnosis"
               w="170px"
               _placeholder={{ color: "inherit" }}
-              color="#0f13f1"
+              color="black"
             />
           </HStack>
           <HStack>
@@ -212,7 +219,7 @@ const Nutrition = () => {
               onChange={(e) => setag(e.target.value)}
               placeholder="Age"
               _placeholder={{ color: "inherit" }}
-              color="#0f13f1"
+              color="black"
             />{" "}
             <RadioGroup defaultValue="2" onChange={setgender} value={gender}>
               <Stack spacing={2} direction="row">
@@ -235,7 +242,7 @@ const Nutrition = () => {
               onChange={(e) => sethh(e.target.value)}
               placeholder="Height"
               _placeholder={{ color: "inherit" }}
-              color="#0f13f1"
+              color="black"
             />{" "}
             <Input
               isInvalid
@@ -245,7 +252,7 @@ const Nutrition = () => {
               onChange={(e) => setww(e.target.value)}
               placeholder="Weight"
               _placeholder={{ color: "inherit" }}
-              color="#0f13f1"
+              color="black"
             />
           </HStack>
 
@@ -309,12 +316,12 @@ const Nutrition = () => {
             onChange={(e) => setmrr(e.target.value)}
             placeholder="Enter MRN"
             _placeholder={{ color: "inherit" }}
-            color="#0f13f1"
+            color="black"
           />
           <Button colorScheme="teal" variant="outline" onClick={result}>
             Get Patient data
           </Button>
-          <Box h="135px">
+          <Box h="180px">
             {patt.map((e) => {
               return (
                 <>
@@ -326,7 +333,7 @@ const Nutrition = () => {
                     align="center"
                     fontSize="15px"
                     fontWeight="bold"
-                    columns={5}
+                    columns={4}
                     spacing={4}
                     mb="100px"
                   >
@@ -370,7 +377,7 @@ const Nutrition = () => {
           </Box>
         </VStack>{" "}
       </Box>
-      <Box position="fixed" bottom="0" w="100%" p="1.5" bg="#383974">
+      <Box position="fixed" bottom="0" w="100%" p="1.5" bg="black">
         <Text fontSize="13px" color="yellow" align="center">
           All Results Tested And Confermed by Nutrition Team
         </Text>
