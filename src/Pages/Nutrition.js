@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import {
   ChakraProvider,
@@ -13,8 +13,12 @@ import {
   RadioGroup,
   Stack,
   SimpleGrid,
+  Table,
+  Tr,
+  Td,
+  TableContainer,
 } from "@chakra-ui/react";
-
+import { useReactToPrint } from "react-to-print";
 const Nutrition = () => {
   const [ww, setww] = useState(0);
   const [hh, sethh] = useState(0);
@@ -151,10 +155,18 @@ const Nutrition = () => {
     }
   };
   const toast = useToast();
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.patt,
+  });
 
+  const [Click1, setClick1] = useState(false);
+  const Click = () => {
+    setClick1(true);
+  };
   return (
     <ChakraProvider>
-      <Box h='100%'>
+      <Box h="100%">
         <VStack>
           <Box w="100%" bg="#383974">
             <Text color="yellow" align="center" fontSize="40px">
@@ -162,7 +174,6 @@ const Nutrition = () => {
               ICU Calculate
             </Text>
           </Box>
-
           <HStack>
             {" "}
             <Input
@@ -243,12 +254,65 @@ const Nutrition = () => {
             color="#0f13f1"
           />
 
+          {!Click1 ? (
+            <></>
+          ) : (
+            <TableContainer>
+              <Table bg="#383974" border="solid yellow" variant="simple">
+                <Tr>
+                  <Td>name: </Td>
+                  <Td>{name}</Td>
+                  <Td>MRN: </Td>
+                  <Td>{mrn}</Td> <Td>Age: </Td>
+                  <Td>{ag}</Td> <Td>gender: </Td>
+                  <Td>{gender}</Td>
+                </Tr>
+                <Tr>
+                  <Td>diagnosis: </Td>
+                  <Td>{diagnosis}</Td>
+                </Tr>
+                <Tr>
+                  <Td>BMI: </Td>
+                  <Td>{res.toFixed(1)}</Td>
+                </Tr>{" "}
+                <Tr>
+                  {" "}
+                  <Td>KCAL: </Td>
+                  <Td>
+                    {res1.toFixed(1)} - {res2.toFixed(1)}
+                  </Td>
+                </Tr>
+                <Tr>
+                  {" "}
+                  <Td>IBW: </Td>
+                  <Td>{Math.round(res3)}</Td>
+                </Tr>
+                <Tr>
+                  {" "}
+                  <Td>Protien: </Td>
+                  <Td>
+                    {Math.round(res4)} - {Math.round(res5)}
+                  </Td>
+                </Tr>
+                <Tr>
+                  <Td>Fluid: </Td>
+                  <Td>{Math.round(res6)}</Td>
+                </Tr>
+                <Tr>
+                  {" "}
+                  <Td>ADW: </Td>
+                  <Td>{Math.round(res7)}</Td>
+                </Tr>
+              </Table>
+            </TableContainer>
+          )}
+          <Button colorScheme="teal" variant="outline" onClick={Click}>
+            Calculate
+          </Button>
           <Button colorScheme="teal" variant="outline" onClick={addpatient}>
             save
           </Button>
-
           <hr />
-
           <Input
             isInvalid
             errorBorderColor="black"
@@ -262,21 +326,22 @@ const Nutrition = () => {
           <Button colorScheme="teal" variant="outline" onClick={result}>
             Get Patient data
           </Button>
-          <Box  h='135px'>
+          <Box h="135px">
             {patt.map((e) => {
               return (
                 <>
+                  <Button ref={patt.e} onClick={handlePrint}>
+                    Print this out!
+                  </Button>
+
                   <SimpleGrid
                     align="center"
                     fontSize="15px"
                     fontWeight="bold"
                     columns={5}
                     spacing={4}
-                    mb='100px'
-                   
-                    
+                    mb="100px"
                   >
-                    
                     <Box borderRadius="3px" bg="silver">
                       Register date: {e.time.slice(0, 10)}
                     </Box>
@@ -314,7 +379,7 @@ const Nutrition = () => {
           </Box>
         </VStack>{" "}
       </Box>
-      <Box  position="fixed" bottom="0" w="100%" p="1.5" bg="#383974">
+      <Box position="fixed" bottom="0" w="100%" p="1.5" bg="#383974">
         <Text fontSize="13px" color="yellow" align="center">
           All Results Tested And Confermed by Nutrition Team
         </Text>
