@@ -14,7 +14,9 @@ import {
   Stack,
   SimpleGrid,
 } from "@chakra-ui/react";
+
 import { useReactToPrint } from "react-to-print";
+// import { ComponentToPrint } from "./ComponentToPrint";
 const Nutrition = () => {
   const [ww, setww] = useState(0);
   const [hh, sethh] = useState(0);
@@ -152,9 +154,9 @@ const Nutrition = () => {
   };
   const toast = useToast();
   const componentRef = useRef();
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.patt,
-  });
+  // const handlePrint = useReactToPrint({
+  //   content: () => componentRef.patt,
+  // });
 
   const [Click1, setClick1] = useState(false);
   const Click = () => {
@@ -266,7 +268,8 @@ const Nutrition = () => {
               columns={5}
               spacing={4}
               mb="100px"
-              border="black solid 2px "
+              border="black solid 2px"
+              borderRadius="9"
               p="3"
             >
               <Box borderRadius="3px" bg="silver">
@@ -325,9 +328,11 @@ const Nutrition = () => {
             {patt.map((e) => {
               return (
                 <>
-                  <Button ref={patt.e} onClick={handlePrint}>
-                    Print this out!
-                  </Button>
+                  {/* <ReactToPrint
+                    trigger={() => <button>Print this out!</button>}
+                    content={() => componentRef.current}
+                  />
+                  <ComponentToPrint ref={componentRef} /> */}
 
                   <SimpleGrid
                     align="center"
