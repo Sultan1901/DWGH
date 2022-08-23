@@ -14,9 +14,7 @@ import {
   Stack,
   SimpleGrid,
 } from "@chakra-ui/react";
-
 import { useReactToPrint } from "react-to-print";
-// import { ComponentToPrint } from "./ComponentToPrint";
 const Nutrition = () => {
   const [ww, setww] = useState(0);
   const [hh, sethh] = useState(0);
@@ -153,10 +151,6 @@ const Nutrition = () => {
     }
   };
   const toast = useToast();
-  const componentRef = useRef();
-  // const handlePrint = useReactToPrint({
-  //   content: () => componentRef.patt,
-  // });
 
   const [Click1, setClick1] = useState(false);
   const Click = () => {
@@ -165,6 +159,10 @@ const Nutrition = () => {
   const refresh = () => {
     window.location.reload(false);
   };
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
   return (
     <ChakraProvider>
       <Box h="100%">
@@ -324,16 +322,18 @@ const Nutrition = () => {
           <Button colorScheme="teal" variant="outline" onClick={result}>
             Get Patient data
           </Button>
-          <Box h="180px">
+          <Box h="205px">
             {patt.map((e) => {
               return (
                 <>
-                  {/* <ReactToPrint
-                    trigger={() => <button>Print this out!</button>}
-                    content={() => componentRef.current}
-                  />
-                  <ComponentToPrint ref={componentRef} /> */}
-
+                  <Button
+                    m="3"
+                    colorScheme="teal"
+                    variant="outline"
+                    onClick={handlePrint}
+                  >
+                    Print !
+                  </Button>{" "}
                   <SimpleGrid
                     align="center"
                     fontSize="15px"
@@ -341,6 +341,7 @@ const Nutrition = () => {
                     columns={4}
                     spacing={4}
                     mb="100px"
+                    ref={componentRef}
                   >
                     <Box borderRadius="3px" bg="silver">
                       Register date: {e.time.slice(0, 10)}
@@ -380,7 +381,7 @@ const Nutrition = () => {
               );
             })}
           </Box>
-        </VStack>{" "}
+        </VStack> {" "}
       </Box>
       <Box position="fixed" bottom="0" w="100%" p="1.5" bg="black">
         <Text fontSize="13px" color="yellow" align="center">
