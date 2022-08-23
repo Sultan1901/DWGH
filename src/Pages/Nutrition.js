@@ -15,7 +15,7 @@ import {
   SimpleGrid,
   Link,
 } from "@chakra-ui/react";
-import { ColorModeProvider, useColorMode } from "@chakra-ui/color-mode";
+import { useColorMode } from "@chakra-ui/color-mode";
 import { useReactToPrint } from "react-to-print";
 const Nutrition = () => {
   const [ww, setww] = useState(0);
@@ -178,17 +178,13 @@ const { colorMode, toggleColorMode } = useColorMode();
               ICU Calculate
             </Text>
           </Box>
-        
-              <Button
-              
-            
-                colorScheme="teal"
-                variant="outline"
-                onClick={toggleColorMode}
-              >
-                 {colorMode === "light" ? "Dark" : "Light"}
-              </Button>{" "}
-           
+          <Button
+            colorScheme="teal"
+            variant="outline"
+            onClick={toggleColorMode}
+          >
+            {colorMode === "light" ? "Dark" : "Light"}
+          </Button>{" "}
           <HStack>
             <HStack>
               <Button colorScheme="teal" variant="outline" onClick={refresh}>
@@ -304,6 +300,9 @@ const { colorMode, toggleColorMode } = useColorMode();
                 Fluid: {Math.round(res6)}
               </Box>{" "}
               <Box borderRadius="3px" bg="silver">
+                BMI: {res.toFixed(1)}
+              </Box>
+              <Box borderRadius="3px" bg="silver">
                 IBW: {Math.round(res3)}
               </Box>
               <Box borderRadius="3px" bg="silver">
@@ -337,7 +336,6 @@ const { colorMode, toggleColorMode } = useColorMode();
           <Button colorScheme="teal" variant="outline" onClick={result}>
             Get Patient data
           </Button>
-
           <Box h="209px">
             {patt.map((e) => {
               return (
@@ -382,6 +380,9 @@ const { colorMode, toggleColorMode } = useColorMode();
                     </Box>{" "}
                     <Box borderRadius="3px" bg="silver">
                       IBW: {e.ibw}
+                    </Box>
+                    <Box borderRadius="3px" bg="silver">
+                      BMI: {e.bmi}
                     </Box>
                     <Box borderRadius="3px" bg="silver">
                       ADW: {e.adw}
