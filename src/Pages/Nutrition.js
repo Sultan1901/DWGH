@@ -13,6 +13,7 @@ import {
   RadioGroup,
   Stack,
   SimpleGrid,
+  Link,
 } from "@chakra-ui/react";
 import { useReactToPrint } from "react-to-print";
 const Nutrition = () => {
@@ -156,19 +157,21 @@ const Nutrition = () => {
   const Click = () => {
     setClick1(true);
   };
+
   const refresh = () => {
-    window.location.reload(false);
+    window.location.reload();
   };
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+
   return (
     <ChakraProvider>
       <Box h="100%">
         <VStack>
           <Box w="100%" bg="black">
-            <Text color="yellow" align="center" fontSize="40px">
+            <Text color="yellow" align="center" fontSize="30px">
               {" "}
               ICU Calculate
             </Text>
@@ -176,7 +179,7 @@ const Nutrition = () => {
           <HStack>
             <HStack>
               <Button colorScheme="teal" variant="outline" onClick={refresh}>
-                Refresh
+                Clear
               </Button>
             </HStack>{" "}
             <Input
@@ -322,7 +325,7 @@ const Nutrition = () => {
           <Button colorScheme="teal" variant="outline" onClick={result}>
             Get Patient data
           </Button>
-          <Box h="205px">
+          <Box h="209px">
             {patt.map((e) => {
               return (
                 <>
@@ -381,15 +384,18 @@ const Nutrition = () => {
               );
             })}
           </Box>
-        </VStack> {" "}
+        </VStack>{" "}
       </Box>
       <Box position="fixed" bottom="0" w="100%" p="1.5" bg="black">
         <Text fontSize="13px" color="yellow" align="center">
           All Results Tested And Confermed by Nutrition Team
         </Text>
-        <Text fontWeight="bold" fontSize="20px" color="yellow" align="center">
-          Coded by Sultan Alharbi - All rights reserved © 2022
+        <Text fontWeight="bold" fontSize="15px" color="yellow" align="center">
+          Coded by Sultan Alharbi ## <Link  color="gold" href="mailto:p04x@hotmail.com">
+         Contact ##
+        </Link>  All rights reserved © 2022 
         </Text>
+      
       </Box>
     </ChakraProvider>
   );
