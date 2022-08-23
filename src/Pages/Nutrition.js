@@ -15,6 +15,7 @@ import {
   SimpleGrid,
   Link,
 } from "@chakra-ui/react";
+import { ColorModeProvider, useColorMode } from "@chakra-ui/color-mode";
 import { useReactToPrint } from "react-to-print";
 const Nutrition = () => {
   const [ww, setww] = useState(0);
@@ -165,17 +166,29 @@ const Nutrition = () => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-
+const { colorMode, toggleColorMode } = useColorMode();
   return (
     <ChakraProvider>
       <Box h="100%">
         <VStack>
           <Box w="100%" bg="black">
+            {" "}
             <Text color="yellow" align="center" fontSize="30px">
               {" "}
               ICU Calculate
             </Text>
           </Box>
+        
+              <Button
+              
+            
+                colorScheme="teal"
+                variant="outline"
+                onClick={toggleColorMode}
+              >
+                 {colorMode === "light" ? "Dark" : "Light"}
+              </Button>{" "}
+           
           <HStack>
             <HStack>
               <Button colorScheme="teal" variant="outline" onClick={refresh}>
@@ -258,7 +271,6 @@ const Nutrition = () => {
               color="black"
             />
           </HStack>
-
           {!Click1 ? (
             <></>
           ) : (
@@ -325,6 +337,7 @@ const Nutrition = () => {
           <Button colorScheme="teal" variant="outline" onClick={result}>
             Get Patient data
           </Button>
+
           <Box h="209px">
             {patt.map((e) => {
               return (
@@ -386,16 +399,18 @@ const Nutrition = () => {
           </Box>
         </VStack>{" "}
       </Box>
+
       <Box position="fixed" bottom="0" w="100%" p="1.5" bg="black">
         <Text fontSize="13px" color="yellow" align="center">
           All Results Tested And Confermed by Nutrition Team
         </Text>
         <Text fontWeight="bold" fontSize="15px" color="yellow" align="center">
-          Coded by Sultan Alharbi ## <Link  color="gold" href="mailto:p04x@hotmail.com">
-         Contact ##
-        </Link>  All rights reserved © 2022 
+          Coded by Sultan Alharbi ##{" "}
+          <Link color="gold" href="mailto:p04x@hotmail.com">
+            Contact ##
+          </Link>{" "}
+          All rights reserved © 2022
         </Text>
-      
       </Box>
     </ChakraProvider>
   );
