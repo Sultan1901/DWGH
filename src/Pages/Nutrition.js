@@ -166,7 +166,7 @@ const Nutrition = () => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <ChakraProvider>
       <Box h="100%">
@@ -175,7 +175,7 @@ const { colorMode, toggleColorMode } = useColorMode();
             {" "}
             <Text color="yellow" align="center" fontSize="30px">
               {" "}
-              ICU Calculate
+              ICU Calculater
             </Text>
           </Box>
           <Button
